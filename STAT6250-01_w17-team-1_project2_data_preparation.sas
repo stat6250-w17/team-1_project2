@@ -15,11 +15,9 @@
 [Number of Features] 11
 
 [Data Source] http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240
-
 This dataset was downloaded from United Nations website. The site allows the user to customize the data that is needed and download a CSV file.
 
 [Data Dictionary]
-
 	Country or Area – Country: Name of country or area
 	
 	Year: 2012
@@ -39,10 +37,12 @@ This dataset was downloaded from United Nations website. The site allows the use
 	Source Year: Year of confirmed population figure
 	
 	Value: Population value
-
+	
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 2 – Statistics are compiled from registrars
 
-[Unique ID Schema] The columns “Country or Area” and “City” form a composite key which aligns with the composite keys in German population, European pollution, and unique id column “Observation” in US pollution composite datasets. 
+[Unique ID Schema] The columns “Country” and “City” form a composite key which aligns 
+with the composite keys in German population, German O3 & NO2 pollution, and in US 
+pollution datasets. 
 
 --
 
@@ -57,7 +57,6 @@ This dataset was downloaded from United Nations website. The site allows the use
 [Number of Features] 11
 
 [Data Source] http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240
-
 This dataset was downloaded from United Nations website. The site allows the user to customize the data that is needed and download a CSV file.
 
 [Data Dictionary]
@@ -82,9 +81,12 @@ This dataset was downloaded from United Nations website. The site allows the use
 	
 	Value: Population value
 	
+	
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 2 – Statistics are compiled from registrars
 
-[Unique ID Schema] The columns “Country or Area” and “City” form a composite key which aligns with the composite keys in US population, European pollution, and unique id column “Observation” in US pollution composite datasets.
+[Unique ID Schema] The columns “Country” and “City” form a composite key which aligns 
+with the composite keys in German population, German O3 & NO2 pollution, and in US 
+pollution datasets.
 
 --
 
@@ -100,10 +102,7 @@ This dataset was downloaded from United Nations website. The site allows the use
 
 [Data Source] https://www.kaggle.com/sogun3/uspollution
 
-This dataset was downloaded from Kaggle.
-
 [Data Dictionary]
-
 	Observation: Unique ID for dataset
 	
 	County Code: The code of counties in a specific state allocated by US EPA
@@ -160,11 +159,13 @@ This dataset was downloaded from Kaggle.
 	
 	CO AQI: The calculated air quality index of CO within a given day 
 
-[Unique ID Schema] The column “Observation” is a unique ID.
+[Unique ID Schema] The column “Observation” is a unique ID. After identifying the average 
+pollution level by city the new composite key will be city, state, and country.
+In order to merge tables with the other data sets.
 
 --
 
-[Dataset 4 Name] ger12NO2
+[Dataset 4 Name] ger12pol
 
 [Dataset Description] 2012 NO2 Pollution for Germany
 
@@ -172,16 +173,14 @@ This dataset was downloaded from Kaggle.
 
 [Number of Observations] NO2_station_statistics tab: 211
 
-O3_station_statistics tab: 753
-
 [Number of Features] 11
 
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
-
-This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used.
+This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
+Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
+due to characters disallowed in SAS and was also not needed for analysis.
 
 [Data Dictionary]
-
     country_iso_code: Country
 	
 	city_name: City
@@ -204,11 +203,14 @@ This dataset was downloaded from the European Environment Agency. Only pollution
 	
 	above_TV?: Binary (1 = yes, 0 = no) if above target value
 
-[Unique ID Schema] The column “station_european_code” is a unique ID.
+[Unique ID Schema] The column “station_european_code” is a unique ID. After 
+identifying the average NO2 pollution level by city the new composite key will 
+be city and country. This is necessary in order to merge tables with the other 
+data sets.
 
 --
 
-[Dataset 5 Name] ger12O3
+[Dataset 5 Name] ger12pol
 
 [Dataset Description] 2012 O3 Pollution for Germany
 
@@ -219,11 +221,11 @@ This dataset was downloaded from the European Environment Agency. Only pollution
 [Number of Features] 11
 
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
-
-This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used.
+This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
+Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
+due to characters disallowed in SAS and was also not needed for analysis.
 
 [Data Dictionary]
-
     country_iso_code: Country
 	
 	city_name: City
@@ -246,13 +248,16 @@ This dataset was downloaded from the European Environment Agency. Only pollution
 	
 	above_TV?: Binary (1 = yes, 0 = no) if above target value
 
-[Unique ID Schema] The column “station_european_code” is a unique ID.
+[Unique ID Schema] The column “station_european_code” is a unique ID. After 
+identifying the average SO3 pollution level by city the new composite key will 
+be city and country. This is necessary in order to merge tables with the 
+other data sets.
 ;
 
 * setup environmental parameters;
 %let inputDataset1URL = 
-http://filebin.ca/3CzNsE3Nf3TU/2012_US_population.csv;
-%let inputDataset1Type = CSV;
+http://filebin.ca/3DMG9d0J8zkD/2012_US_population.xls;
+%let inputDataset1Type = xls;
 %let inputDataset1DSN = us12pop_raw;
 
 %let inputDataset2URL =
@@ -335,6 +340,7 @@ proc sort data=ger12pol_NO_raw;
 	by city_name;
 run;
 
+*Create new dataset which contains the average NO2 levels by city;
 proc means data=ger12pol_NO_raw mean nonobs nway;
 	class city_name country_iso_code;
 	var statistic_value;
@@ -356,6 +362,7 @@ proc sort data=ger12pol_O_raw;
 	by city_name;
 run;
 
+*Create new dataset which contains the average O3 levels by city;
 proc means data=ger12pol_O_raw mean nonobs nway;
 	class city_name country_iso_code;
 	var statistic_value;
@@ -372,7 +379,7 @@ data ger12pol_O (keep=city country O3_Mean);
 	rename country_iso_code=Country;
 run;
 
-*Create dataset of US's average O3 levels by city and state;
+*Create dataset of US's average NO2, O3, SO2 levels by city and state;
 proc sort data=us12pol_raw;
 	by city state country;
 run;
@@ -395,6 +402,8 @@ data us12pol (keep=city country NO2_Mean O3_Mean SO2_Mean CO_Mean);
 	CO_Mean=CO_Mean*1000; /*Convert to same scale (ppb) for analysis*/
 run;
 
+* sort and check raw datasets for duplicates with respect to their unique ids,
+  removing blank rows, if needed;
 proc sort
 		nodupkey
 		data=us12pop_raw
@@ -414,3 +423,64 @@ proc sort
 		city;
 run;
 
+proc sort
+		nodupkey
+		data=us12pol
+		dupout=us12pol_dup
+		out=us12pol_sorted;
+	by
+		city;
+run;
+
+proc sort
+		nodupkey
+		data=ger12pol_NO
+		dupout=ger12pol_NO_dup
+		out=ger12pol_NO_sorted;
+	by
+		city;
+run;
+
+proc sort
+		nodupkey
+		data=ger12pol_O
+		dupout=ger12pol_O_dup
+		out=ger12pol_O_sorted;
+	by
+		city;
+run;
+
+*Merge vertically US and German population data sets;
+data us_ger_pop (drop=year area sex city_type record_type reliability 
+	source_year value_footnotes state);
+	format country_or_area $ 24. city $21.;
+	merge
+		ger12pop_sorted
+		us12pop_sorted;
+	by city;
+	rename value=population;
+	rename country_or_area=country;
+run;
+
+*Merge horizontally US and German pollution datasets;
+data us_ger_pol;
+	merge 
+		us12pol_sorted
+		ger12pol_no_sorted
+		ger12pol_o_sorted;
+	by city;
+run;
+
+*Merge population and pollution datasets;
+data us_ger_main;
+	merge
+		us_ger_pop
+		us_ger_pol;
+run;
+
+*Remove any cities that do not have pollution data. This will be the main 
+data set used in answering research questions.;
+data us_ger_data;
+	set us_ger_main;
+	where NO2_mean>=-10 or CO_mean>=-10 or SO2_mean>=-10 or O3_mean>=-10;
+run;
