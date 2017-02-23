@@ -15,11 +15,9 @@
 [Number of Features] 11
 
 [Data Source] http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240
-
 This dataset was downloaded from United Nations website. The site allows the user to customize the data that is needed and download a CSV file.
 
 [Data Dictionary]
-
 	Country or Area – Country: Name of country or area
 	
 	Year: 2012
@@ -39,7 +37,7 @@ This dataset was downloaded from United Nations website. The site allows the use
 	Source Year: Year of confirmed population figure
 	
 	Value: Population value
-
+	
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 2 – Statistics are compiled from registrars
 
 [Unique ID Schema] The columns “Country” and “City” form a composite key which aligns 
@@ -59,7 +57,6 @@ pollution datasets.
 [Number of Features] 11
 
 [Data Source] http://data.un.org/Data.aspx?d=POP&f=tableCode%3A240
-
 This dataset was downloaded from United Nations website. The site allows the user to customize the data that is needed and download a CSV file.
 
 [Data Dictionary]
@@ -84,11 +81,13 @@ This dataset was downloaded from United Nations website. The site allows the use
 	
 	Value: Population value
 	
+	
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 2 – Statistics are compiled from registrars
 
 [Unique ID Schema] The columns “Country” and “City” form a composite key which aligns 
 with the composite keys in German population, German O3 & NO2 pollution, and in US 
 pollution datasets.
+
 --
 
 [Dataset 3 Name] us12pol
@@ -104,7 +103,6 @@ pollution datasets.
 [Data Source] https://www.kaggle.com/sogun3/uspollution
 
 [Data Dictionary]
-
 	Observation: Unique ID for dataset
 	
 	County Code: The code of counties in a specific state allocated by US EPA
@@ -175,8 +173,6 @@ In order to merge tables with the other data sets.
 
 [Number of Observations] NO2_station_statistics tab: 211
 
-O3_station_statistics tab: 753
-
 [Number of Features] 11
 
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
@@ -186,7 +182,6 @@ Cities with characters disallowed in SAS were reformatted. Measurement_unit colu
 due to characters disallowed in SAS and was also not needed for analysis.
 
 [Data Dictionary]
-
     country_iso_code: Country
 	
 	city_name: City
@@ -211,7 +206,7 @@ due to characters disallowed in SAS and was also not needed for analysis.
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
 identifying the average NO2 pollution level by city the new composite key will 
-be city and country. This is neccessary in order to merge tables with the other 
+be city and country. This is necessary in order to merge tables with the other  
 data sets.
 
 --
@@ -227,13 +222,11 @@ data sets.
 [Number of Features] 11
 
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
-
 This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
 Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
 due to characters disallowed in SAS and was also not needed for analysis.
 
 [Data Dictionary]
-
     country_iso_code: Country
 	
 	city_name: City
@@ -258,14 +251,14 @@ due to characters disallowed in SAS and was also not needed for analysis.
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
 identifying the average SO3 pollution level by city the new composite key will 
-be city and country. This is neccessary In order to merge tables with the 
+be city and country. This is necessary in order to merge tables with the 
 other data sets.
 ;
 
 * setup environmental parameters;
 %let inputDataset1URL = 
-http://filebin.ca/3CzNsE3Nf3TU/2012_US_population.csv;
-%let inputDataset1Type = CSV;
+http://filebin.ca/3DMG9d0J8zkD/2012_US_population.xls;
+%let inputDataset1Type = xls;
 %let inputDataset1DSN = us12pop_raw;
 
 %let inputDataset2URL =
@@ -461,6 +454,7 @@ run;
 *Merge vertically US and German population data sets;
 data us_ger_pop (drop=year area sex city_type record_type reliability 
 	source_year value_footnotes state);
+	format country_or_area $ 24. city $21.;
 	merge 
 		ger12pop_sorted 
 		us12pop_sorted;
