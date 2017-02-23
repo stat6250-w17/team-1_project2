@@ -176,6 +176,7 @@ In order to merge tables with the other data sets.
 [Number of Features] 11
 
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
+
 This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
 Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
 due to characters disallowed in SAS and was also not needed for analysis.
@@ -205,7 +206,7 @@ due to characters disallowed in SAS and was also not needed for analysis.
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
 identifying the average NO2 pollution level by city the new composite key will 
-be city and country. This is necessary in order to merge tables with the other 
+be city and country. This is necessary in order to merge tables with the other  
 data sets.
 
 --
@@ -454,8 +455,8 @@ run;
 data us_ger_pop (drop=year area sex city_type record_type reliability 
 	source_year value_footnotes state);
 	format country_or_area $ 24. city $21.;
-	merge
-		ger12pop_sorted
+	merge 
+		ger12pop_sorted 
 		us12pop_sorted;
 	by city;
 	rename value=population;
