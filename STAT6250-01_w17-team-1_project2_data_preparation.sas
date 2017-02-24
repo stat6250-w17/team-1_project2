@@ -160,8 +160,8 @@ pollution datasets.
 	CO AQI: The calculated air quality index of CO within a given day 
 
 [Unique ID Schema] The column “Observation” is a unique ID. After identifying the average 
-pollution level by city the new composite key will be city, state, and country.
-In order to merge tables with the other data sets.
+pollution level by city the new composite key will be city, state, and country in order to 
+merge datasets with the other data sets.
 
 --
 
@@ -179,7 +179,7 @@ In order to merge tables with the other data sets.
 
 This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
 Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
-due to characters disallowed in SAS and was also not needed for analysis.
+due to characters disallowed in SAS and was not needed for our analysis.
 
 [Data Dictionary]
     country_iso_code: Country
@@ -224,7 +224,7 @@ data sets.
 [Data Source] http://www.eea.europa.eu/data-and-maps/data/air-pollutant-concentrations-at-station/#tab-based-on-data
 This dataset was downloaded from the European Environment Agency. Only pollution data from 2012 was used. 
 Cities with characters disallowed in SAS were reformatted. Measurement_unit column was removed prior to use in SAS
-due to characters disallowed in SAS and was also not needed for analysis.
+due to characters disallowed in SAS and was not needed for our analysis.
 
 [Data Dictionary]
     country_iso_code: Country
@@ -251,8 +251,7 @@ due to characters disallowed in SAS and was also not needed for analysis.
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
 identifying the average SO3 pollution level by city the new composite key will 
-be city and country. This is necessary in order to merge tables with the 
-other data sets.
+be city and country. This is necessary in order to merge with the other datasets.
 ;
 
 * setup environmental parameters;
