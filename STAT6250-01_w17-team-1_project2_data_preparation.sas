@@ -479,7 +479,7 @@ data us_ger_main;
 		us_ger_pol;
 run;
 
-*Remove any cities that do not have pollution data. This will be the main 
+*Remove any cities that do not have pollution data. This will be the primary 
 data set used in answering research questions.;
 data us_ger_data;
 	set us_ger_main;
