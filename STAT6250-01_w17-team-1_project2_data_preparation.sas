@@ -341,7 +341,7 @@ proc sort data=ger12pol_NO_raw;
 run;
 
 *Create new dataset which contains the average NO2 levels by city;
-proc means data=ger12pol_NO_raw mean nonobs nway;
+proc means data=ger12pol_NO_raw mean nonobs nway noprint;
 	class city_name country_iso_code;
 	var statistic_value;
 	OUTPUT OUT = ger12pol_NO_avg;
@@ -363,7 +363,7 @@ proc sort data=ger12pol_O_raw;
 run;
 
 *Create new dataset which contains the average O3 levels by city;
-proc means data=ger12pol_O_raw mean nonobs nway;
+proc means data=ger12pol_O_raw mean nonobs nway noprint;
 	class city_name country_iso_code;
 	var statistic_value;
 	OUTPUT OUT = ger12pol_O_avg;
@@ -384,7 +384,7 @@ proc sort data=us12pol_raw;
 	by city state country;
 run;
 
-proc means data=us12pol_raw mean nonobs nway;
+proc means data=us12pol_raw mean nonobs nway noprint;
 	class city state country;
 	var NO2_Mean O3_Mean SO2_Mean CO_Mean;
 	OUTPUT OUT=us12pol_avg;
