@@ -313,27 +313,27 @@ http://filebin.ca/3D0xjFMIo8jJ/2012_Germany_pol_O.xls;
     &inputDataset1DSN.,
     &inputDataset1URL.,
     &inputDataset1Type.
-)
+);
 %loadDataIfNotAlreadyAvailable(
     &inputDataset2DSN.,
     &inputDataset2URL.,
     &inputDataset2Type.
-)
+);
 %loadDataIfNotAlreadyAvailable(
     &inputDataset3DSN.,
     &inputDataset3URL.,
     &inputDataset3Type.
-)
+);
 %loadDataIfNotAlreadyAvailable(
     &inputDataset4DSN.,
     &inputDataset4URL.,
     &inputDataset4Type.
-)
+);
 %loadDataIfNotAlreadyAvailable(
     &inputDataset5DSN.,
     &inputDataset5URL.,
     &inputDataset5Type.
-)
+);
 
 *Create dataset of Germany's average NO2 levels by city;
 proc sort data=ger12pol_NO_raw;
@@ -453,7 +453,7 @@ run;
 *Merge vertically US and German population data sets;
 data us_ger_pop (drop=year area sex city_type record_type reliability 
 	source_year value_footnotes state);
-	format country_or_area $ 24. city $21.;
+	format country_or_area $ 24. city $25.;
 	merge 
 		ger12pop_sorted 
 		us12pop_sorted;
