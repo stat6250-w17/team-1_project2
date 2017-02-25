@@ -43,7 +43,7 @@ relative file import path to the current directory, if using Windows;
 *******************************************************************************;
 
 title1
-"What is the city in the top 10 cities by population that has the lowest pollution (CO)?"
+"Which city among the top 10 cities by population has the lowest pollution (CO)?"
 ;
 
 title2
@@ -51,15 +51,17 @@ title2
 ;
 
 footnote1
-"Out of the higehst 10 cities in population, the lowest city in regards to CO polution was East Hartford in the United States"
+"Out of the highest 10 cities in population, the lowest city in regards to CO pollution was East Hartford in the United States"
 ;
 
 footnote2
-"Future Improvements: Add graph of highest polluted cities, and show how the CO polution compares to the lowest polutted city"
+"Future Improvements: Add graph of highest polluted cities, and show how the CO pollution compares to the lowest polluted city"
 ;
 
-*Methodology:
-- proc sort order by population (highest on top), then by CO_Mean (lowest on top)
+*
+Methodology:
+- proc sort order by population (highest on top), 
+    then by CO_Mean (lowest on top)
 - Print out the 1st item as this is the desired result
 ;
 
@@ -84,7 +86,7 @@ footnote;
 *******************************************************************************;
 
 title1
-"What is the city in the bottom 10 cities by population that has the highest pollution (CO)? "
+"Which city among the bottom 10 cities by population has the highest pollution (CO)? "
 ;
 
 title2
@@ -92,14 +94,19 @@ title2
 ;
 
 footnote1
-"Out of the lowest 10 cities in population, the highest city in regards to CO polution was Oakland in the United States"
+"Out of the lowest 10 cities in population, the highest city in regards to CO pollution was Oakland in the United States"
 ;
 
 footnote2
-"Future Improvements: Add graph of lowest polluted cities, and show how the CO polution compares to the highest polutted city"
+"Future Improvements: Add graph of lowest polluted cities, and show how the CO pollution compares to the highest polluted city"
 ;
 
-
+*
+Methodology:
+- proc sort order by population (lowest on top), 
+    then by CO_Mean (highest on top)
+- Print out the 1st item as this is the desired result
+;
 
 proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_asc;
     where CO_Mean is not missing;
@@ -134,11 +141,12 @@ footnote1
 ;
 
 footnote2
-"Future Improvements: Add graph of lowest polluted cities, and show how the CO polution compares to the highest polutted city"
+"Future Improvements: Add graph of lowest polluted cities, and show how the CO pollution compares to the highest polluted city"
 ;
 
 
-*Methodology:
+*
+Methodology:
 - proc sort order by CO_Mean (lowest on top)
 - Print out the 1st item as this is the desired result
 ;
