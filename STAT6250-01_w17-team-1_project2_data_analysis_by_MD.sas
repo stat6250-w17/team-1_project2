@@ -55,22 +55,25 @@ footnote1
 ;
 
 footnote2
-""
+"Future Improvements: Add graph of highest polluted cities, and show how the CO polution compares to the lowest polutted city"
 ;
 
-*Methodology: This would aggregate on the value column of the population data, and compare with the CO column of pollution data.;
+*Methodology:
+- proc sort order by population (highest on top), then by CO_Mean (lowest on top)
+- Print out the 1st item as this is the desired result
+;
 
 proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_desc;
-   where CO_Mean is not missing;
-   by descending population;
+    where CO_Mean is not missing;
+    by descending population;
 run;
 
 proc sort data=us_ger_data_co_pop_sorted_desc(obs=5) out=us_ger_data_co_pop_t5;
-   by CO_Mean;
+    by CO_Mean;
 run;
 
 proc print data=us_ger_data_co_pop_t5(obs=1)
-   noobs;
+    noobs;
 run;
 
 title;
@@ -92,19 +95,23 @@ footnote1
 "Out of the lowest 10 cities in population, the highest city in regards to CO polution was Oakland in the United States"
 ;
 
-*Methodology: This would aggregate on the value column of the population data, and compare with the CO column of pollution data.;
+footnote2
+"Future Improvements: Add graph of lowest polluted cities, and show how the CO polution compares to the highest polutted city"
+;
+
+
 
 proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_asc;
-   where CO_Mean is not missing;
-   by population;
+    where CO_Mean is not missing;
+    by population;
 run;
 
 proc sort data=us_ger_data_co_pop_sorted_asc(obs=5) out=us_ger_data_co_pop_b5;
-   by descending CO_Mean;
+    by descending CO_Mean;
 run;
 
 proc print data=us_ger_data_co_pop_b5(obs=1)
-   noobs;
+    noobs;
 run;
 
 title;
@@ -123,19 +130,27 @@ title2
 ;
 
 footnote1
-"The lowest mean CO leven is in Vandenberg Air Force Base in the United States."
+"The lowest CO level is in Vandenberg Air Force Base in the United States which has 277080 people"
 ;
 
-*Methodology: This would aggregate on the value column of the population data, and compare with the CO column of pollution data.;
+footnote2
+"Future Improvements: Add graph of lowest polluted cities, and show how the CO polution compares to the highest polutted city"
+;
+
+
+*Methodology:
+- proc sort order by CO_Mean (lowest on top)
+- Print out the 1st item as this is the desired result
+;
 
 proc sort data=us_ger_data out=us_ger_data_co_sorted;
-   where CO_Mean is not missing;
-   by CO_Mean;
+    where CO_Mean is not missing;
+    by CO_Mean;
 run;
 
 proc print data=us_ger_data_co_sorted(obs=1)
-   noobs;
-run;   
+    noobs;
+run;
 
 title;
 footnote;
