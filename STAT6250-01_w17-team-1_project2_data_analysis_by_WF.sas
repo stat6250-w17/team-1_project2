@@ -134,7 +134,7 @@ title1
 ;
 
 title2
-"Rationale: SO2 can affect both health and the environment.This analysis helps identify what is the best big city to live in..."
+"Rationale: SO2 can affect both health and the environment.This analysis helps identify what is the best overall city to live in..."
 ;
 
 footnote1
