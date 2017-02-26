@@ -1,4 +1,4 @@
- 
+
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 *******************************************************************************;
@@ -115,7 +115,7 @@ proc sort data=us_ger_data out=us_ger_data_so2_pop_sorted_asc;
 run;
 
 proc sort data=us_ger_data_so2_pop_sorted_asc(obs=5) out=us_ger_data_so2_pop_b5;
-    by descending SO2_Mean;
+    by Descending SO2_Mean;
 run;
 
 proc print data=us_ger_data_so2_pop_b5(obs=1)
