@@ -42,9 +42,8 @@ user to customize the data that is needed and download a CSV file.
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 2 – 
 	Statistics are compiled from registrars
 
-[Unique ID Schema] The column city name is the primary key which aligns with the 
-composite keys in German population, German O3 & NO2 pollution, and in US 
-pollution datasets. 
+[Unique ID Schema] The column city is the unique ID which aligns with the unique 
+ID in German population, German O3 & NO2 pollution, and in US pollution datasets. 
 
 --
 
@@ -88,9 +87,8 @@ user to customize the data that is needed and download a CSV file.
 	Value Footnotes: 1 – Population statistics are compiled from registrars, 
 	2 – Statistics are compiled from registrars
 
-[Unique ID Schema] The columns “City” is the primary key which aligns with the 
-composite keys in US population, German O3 & NO2 pollution, and in US 
-pollution datasets.
+[Unique ID Schema] The column city is the unique ID which aligns with the unique 
+ID in US population, German O3 & NO2 pollution, and in US pollution datasets.
 
 --
 
@@ -173,8 +171,8 @@ location
 	CO AQI: The calculated air quality index of CO within a given day 
 
 [Unique ID Schema] The column “Observation” is a unique ID. After identifying 
-the average pollution level by city, the primary key will be city name in order 
-to merge datasets with the other datasets.
+the average pollution level by city, the unique ID will be city name in order 
+to merge with the other datasets.
 
 --
 
@@ -218,9 +216,8 @@ characters disallowed in SAS and was not needed for our analysis.
 	above_TV?: Binary (1 = yes, 0 = no) if above target value
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
-identifying the average NO2 pollution level by city the new primary key will 
-be city. This is necessary in order to merge tables with the other 
-datasets.
+identifying the average NO2 pollution level by city the new unique ID will 
+be city. This is necessary in order to merge with the other datasets.
 
 --
 
@@ -264,7 +261,7 @@ characters disallowed in SAS and was not needed for our analysis.
 	above_TV?: Binary (1 = yes, 0 = no) if above target value
 
 [Unique ID Schema] The column “station_european_code” is a unique ID. After 
-identifying the average SO3 pollution level by city the new primary key will 
+identifying the average SO3 pollution level by city the new unique ID will 
 be city. This is necessary in order to merge with the other datasets.
 ;
 
