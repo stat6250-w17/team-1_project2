@@ -174,7 +174,7 @@ location
 
 [Unique ID Schema] The column “Observation” is a unique ID. After identifying 
 the average pollution level by city, the primary key will be city name in order 
-to merge datasets with the other data sets.
+to merge datasets with the other datasets.
 
 --
 
