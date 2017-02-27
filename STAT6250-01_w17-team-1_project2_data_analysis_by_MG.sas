@@ -5,11 +5,9 @@
 This file uses the following analytic dataset to address several research
 questions regarding the potential relationship of various emission particles to 
 population in the United States and Germany.
-
 Dataset Name: us_ger_data created in external file
 STAT6250-01_w17-team-1_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file.
-
 See included file for dataset properties.
 ;
 
