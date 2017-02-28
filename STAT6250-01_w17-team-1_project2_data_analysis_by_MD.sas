@@ -51,7 +51,7 @@ title2
 ;
 
 footnote1
-"Out of the highest 10 cities in population, the lowest city in regards to CO pollution was East Hartford in the United States"
+"Out of the highest 10 cities in population, the lowest city in regards to CO pollution was Tucson in the United States"
 ;
 
 footnote2
@@ -66,7 +66,8 @@ Methodology:
 ;
 
 proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_desc;
-    where CO_Mean is not missing;
+    where CO_Mean is not missing
+    and population is not missing;
     by descending population;
 run;
 
@@ -94,7 +95,7 @@ title2
 ;
 
 footnote1
-"Out of the lowest 10 cities in population, the highest city in regards to CO pollution was Oakland in the United States"
+"Out of the lowest 10 cities in population, the highest city in regards to CO pollution was Burbank in the United States"
 ;
 
 footnote2
@@ -109,7 +110,8 @@ Methodology:
 ;
 
 proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_asc;
-    where CO_Mean is not missing;
+    where CO_Mean is not missing
+    and population is not missing;
     by population;
 run;
 
@@ -137,7 +139,7 @@ title2
 ;
 
 footnote1
-"The lowest CO level is in Vandenberg Air Force Base in the United States which has 277080 people"
+"The lowest CO level is in Costa Mesa in the United States which has 111918 people"
 ;
 
 footnote2
@@ -152,7 +154,8 @@ Methodology:
 ;
 
 proc sort data=us_ger_data out=us_ger_data_co_sorted;
-    where CO_Mean is not missing;
+    where CO_Mean is not missing
+    and population is not missing;
     by CO_Mean;
 run;
 
