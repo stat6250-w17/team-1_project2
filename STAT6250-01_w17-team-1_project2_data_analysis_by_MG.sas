@@ -1,6 +1,7 @@
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 *******************************************************************************;
+*IL: use line breaks to create paragraphs in comment blocks;
 *
 This file uses the following analytic dataset to address several research
 questions regarding the potential relationship of various emission particles to 
@@ -40,12 +41,13 @@ relative file import path to the current directory, if using Windows;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
-title1"What is the correlation of NO2 to population in the US versus Germany?"
+title1 "What is the correlation of NO2 to population in the US versus Germany?";
+*IL put long strings on lines by themselves with no wrapping; 
+title2
+"Rationale: The purpose of this analysis is try to identify the relationship of population to NO2 levels between the two countries."
 ;
-
-title2"Rationale: The purpose of this analysis is try to identify the relationship of population to NO2 levels between the two countries."
-;
-
+*IL: expanding analysis results to include specific numbers, sufficient to
+     give a summary without needing tables;
 footnote1"There was small to little correlation/relationship between the population and NO2 levels for either country."
 ;
 
@@ -54,20 +56,21 @@ footnote2"Using a significance value of .05, both p-values were higher than the 
 
 footnote3"Future analysis could include identifying correlations for SO2, O3, and CO to population. This will help to identify which emission type(s) is influenced by population the most and identify reasons for the correlation."
 ;
-
+*IL: wrap comments at 80 characters;
 *
 Note: This calculates the correlation coefficients of using each country's respective population and average NO2 by city. The correlation coefficients of each country will be compared to see the relationship of NO2 to population for each country.
 
 Methodology: Correlation analysis using PROC CORR was performed for each country to analyze the relationship of population to NO2.;
 
 proc corr data=us_ger_data;
-	var population NO2_mean;
-	where country="United States of America";
+    var population NO2_mean;
+    where country="United States of America";
 run;
-
+*IL: use title3 statements before each proc corr step to give differentiated
+     output;
 proc corr data=us_ger_data;
-	var population NO2_mean;
-	where country="Germany";
+    var population NO2_mean;
+    where country="Germany";
 run;
 
 title;
@@ -96,10 +99,11 @@ footnote2"These resuts were surprising. Germany is known to have more stringent 
 Note: The two sample t-test will identify the significance of the NO2 mean difference between the countries and its significance level.
 
 Methodology: PROC TTEST was used to perform the two sample t-test.;
-
+*IL: consider controlling the output to only show what's needed, and consider
+     describing the significance of each component of output;
 proc ttest data=us_ger_data cochran ci=equal umpu;
-	class country;
-	var NO2_mean;
+    class country;
+    var NO2_mean;
 run;
 
 title;
@@ -125,7 +129,7 @@ footnote2"Future analysis could include collecting more data from the United Sta
 Note: The mean for NO2 and O3 will be calculated for each country using PROC Means.
 
 Methodology: PROC MEANS was used to identify the average NO2 and O3 levels for both countries.;
-
+*IL consider combining the four proc means steps into one;
 proc means data=us_ger_data nonobs;
 var NO2_mean;
 where country="United States of America";
