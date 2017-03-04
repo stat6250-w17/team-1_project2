@@ -71,11 +71,11 @@ proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_desc;
     by descending population;
 run;
 
-proc sort data=us_ger_data_co_pop_sorted_desc(obs=5) out=us_ger_data_co_pop_t5;
+proc sort data=us_ger_data_co_pop_sorted_desc(obs=10) out=us_ger_data_co_pop_t10;
     by CO_Mean;
 run;
 
-proc print data=us_ger_data_co_pop_t5(obs=1)
+proc print data=us_ger_data_co_pop_t10(obs=1)
     noobs;
 run;
 
@@ -115,11 +115,11 @@ proc sort data=us_ger_data out=us_ger_data_co_pop_sorted_asc;
     by population;
 run;
 
-proc sort data=us_ger_data_co_pop_sorted_asc(obs=5) out=us_ger_data_co_pop_b5;
+proc sort data=us_ger_data_co_pop_sorted_asc(obs=10) out=us_ger_data_co_pop_b10;
     by descending CO_Mean;
 run;
 
-proc print data=us_ger_data_co_pop_b5(obs=1)
+proc print data=us_ger_data_co_pop_b10(obs=1)
     noobs;
 run;
 
