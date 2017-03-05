@@ -1,4 +1,3 @@
-
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 *******************************************************************************;
@@ -61,8 +60,7 @@ footnote2
 
 *
 Methodology:
-- proc sort order by population (highest on top),  
-    then by SO2_Mean (lowest on top)
+- proc sort order by population (highest on top),then by SO2_Mean (lowest on top)
 - Print out the 1st item as this is the desired result
 ;
 
@@ -76,8 +74,7 @@ proc sort data=us_ger_data_so2_pop_sorted_desc(obs=5) out=us_ger_data_so2_pop_t5
     by SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_pop_t5(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_pop_t5(obs=1) noobs;
 run;
 
 title;
@@ -120,8 +117,7 @@ proc sort data=us_ger_data_so2_pop_sorted_asc(obs=5) out=us_ger_data_so2_pop_b5;
     by Descending SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_pop_b5(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_pop_b5(obs=1) noobs;
 run;
 
 title;
@@ -161,8 +157,7 @@ proc sort data=us_ger_data out=us_ger_data_so2_sorted;
     by SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_sorted(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_sorted(obs=1) noobs;
 run;
 
 title;
