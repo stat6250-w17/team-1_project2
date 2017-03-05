@@ -1,4 +1,3 @@
-
 *******************************************************************************;
 **************** 80-character banner for column width reference ***************;
 *******************************************************************************;
@@ -44,7 +43,7 @@ relative file import path to the current directory, if using Windows;
 *******************************************************************************;
 
 title1
-"What is the city in the top 10 cities by population that has the lowest SO2?"
+"What is the city in the top 5 cities by population that has the lowest SO2?"
 ;
 
 title2
@@ -52,7 +51,7 @@ title2
 ;
 
 footnote1
-"Out of the highest 10 cities in population, the lowest city in regards to SO2 pollution was East Hartford in the United States"
+"Out of the top 5 cities in population, the city in regards to having lowest SO2 pollution was Tucson in the United States"
 ;
 
 footnote2
@@ -61,13 +60,13 @@ footnote2
 
 *
 Methodology:
-- proc sort order by population (highest on top),  
-    then by SO2_Mean (lowest on top)
+- proc sort order by population (highest on top),then by SO2_Mean (lowest on top)
 - Print out the 1st item as this is the desired result
 ;
 
 proc sort data=us_ger_data out=us_ger_data_so2_pop_sorted_desc;
-    where SO2_Mean is not missing;
+    where SO2_Mean is not missing
+    and population is not missing;
     by descending population;
 run;
 
@@ -75,8 +74,7 @@ proc sort data=us_ger_data_so2_pop_sorted_desc(obs=5) out=us_ger_data_so2_pop_t5
     by SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_pop_t5(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_pop_t5(obs=1) noobs;
 run;
 
 title;
@@ -87,15 +85,15 @@ footnote;
 *******************************************************************************;
 
 title1
-"Which is the city in the bottom 10 cities by population that has highest SO2? "
+"Which is the city in the bottom 5 cities by population that has highest SO2? "
 ;
 
 title2
-"Rationale:  SO2 can affect both health and the environment.This analysis helps identify what is the worst little city to live in..."
+"Rationale:  SO2 can affect both health and the environment.This analysis helps identify what is the worst small city to live in..."
 ;
 
 footnote1
-"Out of the lowest 10 cities in population, the highest city in regards to SO2 pollution was New Haven in the United States"
+"Out of the bottom 5 cities in population, the city in regards to having highest SO2 pollution was Wilmington in the United States"
 ;
 
 footnote2
@@ -110,7 +108,8 @@ Methodology:
 ;
 
 proc sort data=us_ger_data out=us_ger_data_so2_pop_sorted_asc;
-    where SO2_Mean is not missing;
+    where SO2_Mean is not missing
+    AND population is not missing; 
     by population;
 run;
 
@@ -118,8 +117,7 @@ proc sort data=us_ger_data_so2_pop_sorted_asc(obs=5) out=us_ger_data_so2_pop_b5;
     by Descending SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_pop_b5(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_pop_b5(obs=1) noobs;
 run;
 
 title;
@@ -138,7 +136,7 @@ title2
 ;
 
 footnote1
-"The lowest SO2 level is in Winter Park in the United States which has population of 149,633."
+"The city that has lowest SO2 level is Des Miones in the United States, which has population of 206,688."
 ;
 
 footnote2
@@ -153,12 +151,13 @@ Methodology:
 ;
 
 proc sort data=us_ger_data out=us_ger_data_so2_sorted;
-    where SO2_Mean is not missing AND SO2_Mean > 0;
+    where SO2_Mean is not missing 
+    AND SO2_Mean > 0
+    AND population is not missing;
     by SO2_Mean;
 run;
 
-proc print data=us_ger_data_so2_sorted(obs=1)
-    noobs;
+proc print data=us_ger_data_so2_sorted(obs=1) noobs;
 run;
 
 title;
